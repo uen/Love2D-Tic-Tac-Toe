@@ -36,25 +36,26 @@ function IsWinner(board, x)
         local b = v[1]
         local a = {}
 
-        --Check horizontal
-        if (b.Occupier == x) then
+        if ((b.Occupier == x))then
             for k2,v2 in pairs(v) do
-                if(v2.Occupier==b.Occupier) then
-                    a[#a+1] = v2.Occupier
+                if not(v2.Occupier == 0) then
+                    if(v2.Occupier==b.Occupier) then
+                        a[#a+1] = v2.Occupier
+                    end
                 end
             end
             if(#a >= GridSize) then
-                print('WIN: 1')
                 return true
             end
         end
+        a = {}
 
         --Check Vertical
         for k3,v3 in pairs(v) do
             a = {}
             b = v3
 
-            if (b.Occupier == x) then
+            if (b.Occupier == x) and (not b.Occupier==0) then
                 for k4, v4 in pairs(board) do
                     if(v4[k3].Occupier==b.Occupier) then
                         a[#a+1] = v4[k3]
@@ -74,31 +75,31 @@ function IsWinner(board, x)
         d = Grid[1][GridSize]
         for i=1, GridSize do 
             for o=1, GridSize do
-                if (d.Occupier == x) then       
-                    if(d.Occupier == Grid[i][GridSize-o+1].Occupier) then
-                        c[#c+1] = Grid[(GridSize-i)+1][o]
-                    end
-                end
+
                 if(b.Occupier == x) then
                     if(b.Occupier == Grid[i][o].Occupier) then
-                        a[#a+1] = Grid[i][o]
+                        a[i] = Grid[i][o]
                     end
                 end
-            end
-
-            if (d.Occupier == x) then
-
-                if(#a == GridSize) then
-                    return true
-                end
-
-                if(#c == GridSize) then
-                    return true
+                if (d.Occupier == x) then
+                    if(b.Occupier == Grid[i][o].Occupier) then
+                        c[i] = Grid[GridSize-i+1][GridSize-o+1]
+                    end
                 end
             end
         end
-    end    
+
+
+        if(#c == GridSize) then
+           return true
+        end
+
+        if(#a == GridSize) then
+            return true
+        end
+    end
 end
+
 
 function Visualize(grid) -- Print the current grid to console
     local str2 = '|'
