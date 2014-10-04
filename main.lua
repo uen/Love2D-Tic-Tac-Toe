@@ -186,8 +186,6 @@ function CPUTurn(id,opponent)
             if not(IsTaken(k2,k)) then
                 clone[k][k2].Occupier = opponent
                 if(IsWinner(clone, opponent)) then
-                    print('Human could win at ',k2,k,'so blocked.')
-                    print('GET BLOCKED M8')
                     return TakeTurn(id,k2,k)
                 else
                     clone[k][k2].Occupier = 0 -- UnOccupy
