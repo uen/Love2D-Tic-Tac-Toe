@@ -21,7 +21,7 @@ function TakeTurn(User,x,y)
     if not(IsTaken(x,y)) then
         if((User==2 and CPUSTurn) or (User==1 and (not CPUSTurn))) then
             Grid[y][x].Clicked(Grid[y][x], User)
-            if(IsWinner(Grid,user)) then
+            if(IsWinner(Grid,User)) then
                 print(User..' IS WINNER')
                 return
             end
@@ -37,13 +37,14 @@ function IsWinner(board, x)
         local a = {}
 
         --Check horizontal
-        if not(b.Occupier == 0) then
+        if (b.Occupier == x) then
             for k2,v2 in pairs(v) do
                 if(v2.Occupier==b.Occupier) then
                     a[#a+1] = v2.Occupier
                 end
             end
             if(#a >= GridSize) then
+                print('WIN: 1')
                 return true
             end
         end
@@ -53,11 +54,10 @@ function IsWinner(board, x)
             a = {}
             b = v3
 
-            if not(b.Occupier == 0) then
+            if (b.Occupier == x) then
                 for k4, v4 in pairs(board) do
-
                     if(v4[k3].Occupier==b.Occupier) then
-                        a[k4] = v4[k3].Occupier
+                        a[#a+1] = v4[k3]
                     end
                 end
             end
@@ -74,24 +74,27 @@ function IsWinner(board, x)
         d = Grid[1][GridSize]
         for i=1, GridSize do 
             for o=1, GridSize do
-                if not (d.Occupier == 0) then       
+                if (d.Occupier == x) then       
                     if(d.Occupier == Grid[i][GridSize-o+1].Occupier) then
                         c[#c+1] = Grid[(GridSize-i)+1][o]
                     end
                 end
-                if not (b.Occupier == 0) then
+                if(b.Occupier == x) then
                     if(b.Occupier == Grid[i][o].Occupier) then
                         a[#a+1] = Grid[i][o]
                     end
                 end
             end
 
-            if(#a == GridSize) then
-                return true
-            end
+            if (d.Occupier == x) then
 
-            if(#c == GridSize) then
-                return true
+                if(#a == GridSize) then
+                    return true
+                end
+
+                if(#c == GridSize) then
+                    return true
+                end
             end
         end
     end    
