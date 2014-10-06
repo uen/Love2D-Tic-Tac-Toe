@@ -12,8 +12,6 @@ Cell.Update = function(self)
 
 end
 
-
-
 Cell.Clicked = function(self,User)
     if not(self.Occupier == 0) then
         return
@@ -34,9 +32,6 @@ Cell.Draw = function(self)
         end
     end
 end
-
-
-
 
 function NewCell(x,y,sizex,sizey)
     local NCell = DeepCopy(Cell)
