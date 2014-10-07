@@ -424,7 +424,7 @@ function love.load()
     Slider:SetPos(5,50)
     Slider:SetWidth(290)
     Slider:SetText("Grid Size")
-    Slider:SetMinMax(3, 20)
+    Slider:SetMinMax(3, 1000)
     Slider:SetValue(3)
     Slider:SetDecimals(0)
     Slider.OnValueChanged = function(object2, value)
@@ -439,10 +439,10 @@ function love.load()
     end
     
     local checkbox1 = loveframes.Create("checkbox", frame)
-    checkbox1:SetText("CPU Battle")
+    checkbox1:SetText("Multiplayer")
     checkbox1:SetPos(5, 110)
     checkbox1.OnChanged = function(object,checked)
-        CPUFight = checked
+        MultiPlayer = checked
     end
 
     local text1 = loveframes.Create("text", frame)
