@@ -4,9 +4,8 @@ local CPUSTurn = false
 GridSize = 3
 WindowSize = 900
 CellSize = WindowSize/GridSize
-local CPUFight = false
+local CPUBattle = false
 local EnableCPU = true
-local MultiPlayer = false
 require('cell')
 
 require('lib/loveframes') -- GUI
@@ -281,17 +280,15 @@ end
 function love.update(dt)
     loveframes.update(dt)
     if(loveframes.state=='game') then
-        if not(MultiPlayer) then
-            if(CPUSTurn == true) then
-                if(EnableCPU) then
-                    CPUTurn(2,1)
-                end
-            else
-                if(CPUFight) then
-                    CPUTurn(1,2)
-                end
+        if(CPUSTurn == true) then
+            if(EnableCPU) then
+                CPUTurn(2,1)
             end
-        end
+        else
+            if(CPUFight) then
+                CPUTurn(1,2)
+            end
+      end
   end
 end
 
@@ -415,7 +412,7 @@ function love.load()
     local frame = loveframes.Create("frame")
     frame:SetName("Settings")
     frame:SetWidth(300)
-    frame:SetHeight(300)
+    frame:SetHeight(250)
     frame:Center()
 
 
@@ -424,7 +421,7 @@ function love.load()
     Slider:SetPos(5,50)
     Slider:SetWidth(290)
     Slider:SetText("Grid Size")
-    Slider:SetMinMax(3, 1000)
+    Slider:SetMinMax(3, 20)
     Slider:SetValue(3)
     Slider:SetDecimals(0)
     Slider.OnValueChanged = function(object2, value)
@@ -437,13 +434,6 @@ function love.load()
     checkbox1.OnChanged = function(object,checked)
         CPUFight = checked
     end
-    
-    local checkbox1 = loveframes.Create("checkbox", frame)
-    checkbox1:SetText("Multiplayer")
-    checkbox1:SetPos(5, 110)
-    checkbox1.OnChanged = function(object,checked)
-        MultiPlayer = checked
-    end
 
     local text1 = loveframes.Create("text", frame)
     text1:SetPos(5, 30)
@@ -451,7 +441,7 @@ function love.load()
     text1:SetFont(love.graphics.newFont(10))
     local PlayButton = loveframes.Create("button", frame)
     PlayButton:SetText("Play Tic Tac Toe")
-    PlayButton:SetPos(50,130)
+    PlayButton:SetPos(50,100)
     PlayButton:SetWidth(290)
     PlayButton:Center()     
     PlayButton.OnClick = function(object,x,y)
