@@ -194,11 +194,6 @@ function CPUTurn(id,opponent)
             end
         end
     end
-    -- Try to pick center
-    if not(IsTaken(math.ceil(GridSize/2), math.ceil(GridSize/2))) then
-        return TakeTurn(id,math.ceil(GridSize/2),math.ceil(GridSize/2))
-    end
-
     -- Human went corner? Try and take the corner opposite:
     -- Or just take any corner if not
 
@@ -234,6 +229,13 @@ function CPUTurn(id,opponent)
             return TakeTurn(id,1,1)
         end
     end
+
+    -- Try to pick center
+    if not(IsTaken(math.ceil(GridSize/2), math.ceil(GridSize/2))) then
+        return TakeTurn(id,math.ceil(GridSize/2),math.ceil(GridSize/2))
+    end
+
+
     local turn = available[math.random(#available)]
     if(turn) then
         return TakeTurn(id,turn[1],turn[2])
@@ -243,10 +245,10 @@ function CPUTurn(id,opponent)
 
     x = math.random(GridSize)
     y = math.random(GridSize)
-
     while(IsTaken(x,y)) do
         x = math.random(GridSize)
         y = math.random(GridSize)
+        // Optimise!
     end
     return TakeTurn(id,x,y)
 end
