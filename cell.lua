@@ -3,14 +3,6 @@ Cell.Occupier = 0
 Cell.Position = {0,0}
 Cell.Size = {300,300}
 
-Cell.Init = function()
-
-    
-end
-
-Cell.Update = function(self)
-
-end
 
 Cell.Clicked = function(self,User)
     if not(self.Occupier == 0) then
