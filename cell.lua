@@ -15,8 +15,8 @@ end
 local cross = love.graphics.newImage("img/cross.png")
 local nought = love.graphics.newImage('img/nought.png')
 Cell.Draw = function(self)
-    love.graphics.setColor(0,0,0,255)
     if not(self.Occupier==0) then
+        love.graphics.setColor(0,0,0,255)
         if(self.Occupier == 1) then
             love.graphics.draw(cross,self.Position[1], self.Position[2], 0, CellSize/cross:getWidth(),  CellSize/cross:getWidth())
         elseif(self.Occupier==2) then
